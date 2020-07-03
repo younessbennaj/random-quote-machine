@@ -15,11 +15,17 @@ let author = document.getElementById("author");
 let newQuoteButton = document.getElementById("new-quote");
 let tweetButton = document.getElementById("tweet-quote");
 
+//convert quote text in valid query parameters
+function parseQuoteToQuery(quote) {
+    quote = quote.split(" ");
+    quote = quote.join('%20');
+    return quote;
+}
+
 tweetButton.addEventListener("click", tweetQuote = (event) => {
     //Change the value of href attributes in a element
     //We add query parameters to tweet the quote
-    tweetButton.href = tweetButton.href + "?text=this%20is%20a%20tweet";
-    console.log(tweetButton);
+    tweetButton.href = `${tweetButton.href}?text=${parseQuoteToQuery(text.innerText)}`;
 });
 
 //Add a handler on click event
