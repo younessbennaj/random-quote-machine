@@ -4,8 +4,7 @@ let author = document.getElementById("author");
 let newQuoteButton = document.getElementById("new-quote");
 let tweetButton = document.getElementById("tweet-quote");
 
-//Fetch our quotes 
-
+//Fetch our quotes from https://type.fit/api/quotes
 let getQuotes = () => {
     //Fetch our quotes
     return new Promise((resolve, reject) => {
@@ -48,34 +47,32 @@ function parseQuoteToQuery(quote, author) {
     return quote;
 }
 
+//Init our app
 let init = () => {
     getQuotes().then(
         quotes => {
+            //Set a radom quote and its author in #text and #author
             setQuote(getRandomQuote(quotes));
+            //Add a handler on #newQuoteButton for click event 
+            newQuoteButton.addEventListener("click",
+                //Each click, set a new random quote
+                () => setQuote(getRandomQuote(quotes))
+            );
         },
         error => {
-
+            console.error(error);
         }
     );
+
+    tweetButton.addEventListener("click", tweetQuote = (event) => {
+        //#tweet-quote clicked => "twitter.com/intent/tweet" + attribute to tweet 
+        //Change the value of href attributes in a element
+        //We add query parameters to tweet the quote
+        tweetButton.href = `https://www.twitter.com/intent/tweet?text=${parseQuoteToQuery(text.innerText, author.innerText)}`;
+    });
 }
 
+//When the document is load
 window.addEventListener("load", function (event) {
     init();
-});
-
-
-tweetButton.addEventListener("click", tweetQuote = (event) => {
-    //#tweet-quote clicked => "twitter.com/intent/tweet" + attribute to tweet 
-    //Change the value of href attributes in a element
-    //We add query parameters to tweet the quote
-    tweetButton.href = `https://www.twitter.com/intent/tweet?text=${parseQuoteToQuery(text.innerText, author.innerText)}`;
-});
-
-//Add a handler on click event
-newQuoteButton.addEventListener("click", clickButton = (event) => {
-    //#new-quote button is clicked => new quote in #text
-
-    //random quote ?
-
-    text.innerHTML = "This is a new quote";
 });
