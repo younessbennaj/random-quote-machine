@@ -15,19 +15,34 @@ let tweetButton = document.getElementById("tweet-quote");
 
 let getQuotes = () => {
     //Fetch our quotes
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://type.fit/api/quotes');
-    xhr.onload = () => {
-        console.log(JSON.parse(xhr.responseText));
-    };
-    xhr.send();
+    return new Promise((resolve, reject) => {
+        //Our async operation
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://type.fit/api/quotes');
+        xhr.onload = () => {
+            //If the operation success
+            resolve(JSON.parse(xhr.responseText));
+        };
+        xhr.onerror = () => {
+            //If the operation failed
+            reject(JSON.parse(xhr.responseText));
+        }
+        xhr.send();
+    })
 }
 
 let init = () => {
     text.innerHTML = "Il y a des silences qui en disent longs, comme des paroles qui ne signifient rien..";
     author.innerHTML = "Edith Piaff";
 
-    getQuotes();
+    getQuotes().then(
+        data => {
+            console.log(data);
+        },
+        error => {
+
+        }
+    );
 }
 
 window.addEventListener("load", function (event) {
