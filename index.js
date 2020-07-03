@@ -31,13 +31,23 @@ let getQuotes = () => {
     })
 }
 
+function getRandomIndex(min, max) {
+    //return a random number between min (include) and max (exclude)
+    return Math.ceil(Math.random() * (max - min) + min);
+}
+
+function getRandomQuote(quotes) {
+    //Return a random quote in our fetched data
+    console.log(quotes[getRandomIndex(0, quotes.length + 1)]);
+}
+
 let init = () => {
     text.innerHTML = "Il y a des silences qui en disent longs, comme des paroles qui ne signifient rien..";
     author.innerHTML = "Edith Piaff";
 
     getQuotes().then(
-        data => {
-            console.log(data);
+        quotes => {
+            getRandomQuote(quotes);
         },
         error => {
 
