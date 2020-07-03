@@ -10,3 +10,9 @@ console.log('Random Quote Machine');
 
 //#quote-box => horizontaly centred + run tests with browser's zoom level at 100% and page maximized
 
+//Get our document element
+
+let text = document.getElementById("text");
+let author = document.getElementById("author");
+let newQuoteButton = document.getElementById("new-quote");
+
