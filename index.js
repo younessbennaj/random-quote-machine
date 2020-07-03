@@ -37,7 +37,7 @@ function getRandomQuote(quotes) {
 //Function to display a random quote in the #text element and the author in #author
 function setQuote(quote) {
     text.innerHTML = quote.text;
-    author.innerHTML = quote.author;
+    author.innerHTML = `- ${quote.author}`;
 }
 
 //Convert quote text in valid query parameters
