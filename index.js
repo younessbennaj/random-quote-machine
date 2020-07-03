@@ -1,5 +1,3 @@
-console.log('Random Quote Machine');
-
 //First load => random quote in #text
 
 //First load => author in #author
@@ -16,3 +14,7 @@ let text = document.getElementById("text");
 let author = document.getElementById("author");
 let newQuoteButton = document.getElementById("new-quote");
 
+//Add a handler on click event
+newQuoteButton.addEventListener("click", clickButton = (event) => {
+    text.innerHTML = "This is a new quote";
+});
