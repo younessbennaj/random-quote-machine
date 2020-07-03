@@ -1,11 +1,4 @@
-
-
-//#tweet-quote clicked => "twitter.com/intent/tweet" + attribute to tweet 
-
-//#quote-box => horizontaly centred + run tests with browser's zoom level at 100% and page maximized
-
-//Get our document element
-
+//Get our document element (UI)
 let text = document.getElementById("text");
 let author = document.getElementById("author");
 let newQuoteButton = document.getElementById("new-quote");
@@ -48,6 +41,13 @@ function setQuote(quote) {
     author.innerHTML = quote.author;
 }
 
+//Convert quote text in valid query parameters
+function parseQuoteToQuery(quote, author) {
+    quote = `"${quote}" - ${author}`;
+    quote = quote.split(" ").join('%20');
+    return quote;
+}
+
 let init = () => {
     getQuotes().then(
         quotes => {
@@ -63,17 +63,12 @@ window.addEventListener("load", function (event) {
     init();
 });
 
-//convert quote text in valid query parameters
-function parseQuoteToQuery(quote) {
-    quote = quote.split(" ");
-    quote = quote.join('%20');
-    return quote;
-}
 
 tweetButton.addEventListener("click", tweetQuote = (event) => {
+    //#tweet-quote clicked => "twitter.com/intent/tweet" + attribute to tweet 
     //Change the value of href attributes in a element
     //We add query parameters to tweet the quote
-    tweetButton.href = `${tweetButton.href}?text=${parseQuoteToQuery(text.innerText)}`;
+    tweetButton.href = `https://www.twitter.com/intent/tweet?text=${parseQuoteToQuery(text.innerText, author.innerText)}`;
 });
 
 //Add a handler on click event
