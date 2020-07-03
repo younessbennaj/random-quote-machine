@@ -1,8 +1,4 @@
-//First load => random quote in #text
 
-//First load => author in #author
-
-//#new-quote button is clicked => new quote in #text
 
 //#tweet-quote clicked => "twitter.com/intent/tweet" + attribute to tweet 
 
@@ -14,6 +10,29 @@ let text = document.getElementById("text");
 let author = document.getElementById("author");
 let newQuoteButton = document.getElementById("new-quote");
 let tweetButton = document.getElementById("tweet-quote");
+
+//Fetch our quotes 
+
+let getQuotes = () => {
+    //Fetch our quotes
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://type.fit/api/quotes');
+    xhr.onload = () => {
+        console.log(JSON.parse(xhr.responseText));
+    };
+    xhr.send();
+}
+
+let init = () => {
+    text.innerHTML = "Il y a des silences qui en disent longs, comme des paroles qui ne signifient rien..";
+    author.innerHTML = "Edith Piaff";
+
+    getQuotes();
+}
+
+window.addEventListener("load", function (event) {
+    init();
+});
 
 //convert quote text in valid query parameters
 function parseQuoteToQuery(quote) {
@@ -30,5 +49,9 @@ tweetButton.addEventListener("click", tweetQuote = (event) => {
 
 //Add a handler on click event
 newQuoteButton.addEventListener("click", clickButton = (event) => {
+    //#new-quote button is clicked => new quote in #text
+
+    //random quote ?
+
     text.innerHTML = "This is a new quote";
 });
