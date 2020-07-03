@@ -3,6 +3,28 @@ let text = document.getElementById("text");
 let author = document.getElementById("author");
 let newQuoteButton = document.getElementById("new-quote");
 let tweetButton = document.getElementById("tweet-quote");
+let container = document.getElementById("container");
+
+function getRandomIndex(min, max) {
+    //return a random number between min (include) and max (exclude)
+    return Math.ceil(Math.random() * (max - min) + min);
+}
+
+function changeColor() {
+
+    if (container.classList.contains(`color-1`)) container.classList.replace(`color-1`, `color-2`);
+    else if (container.classList.contains(`color-2`)) container.classList.replace(`color-2`, `color-3`);
+    else if (container.classList.contains(`color-3`)) container.classList.replace(`color-3`, `color-1`);
+
+    if (tweetButton.classList.contains(`a-color-1`)) tweetButton.classList.replace(`a-color-1`, `a-color-2`);
+    else if (tweetButton.classList.contains(`a-color-2`)) tweetButton.classList.replace(`a-color-2`, `a-color-3`);
+    else if (tweetButton.classList.contains(`a-color-3`)) tweetButton.classList.replace(`a-color-3`, `a-color-1`);
+
+
+    if (newQuoteButton.classList.contains(`bg-color-1`)) newQuoteButton.classList.replace(`bg-color-1`, `bg-color-2`);
+    else if (newQuoteButton.classList.contains(`bg-color-2`)) newQuoteButton.classList.replace(`bg-color-2`, `bg-color-3`);
+    else if (newQuoteButton.classList.contains(`bg-color-3`)) newQuoteButton.classList.replace(`bg-color-3`, `bg-color-1`);
+}
 
 //Fetch our quotes from https://type.fit/api/quotes
 let getQuotes = () => {
@@ -23,11 +45,6 @@ let getQuotes = () => {
     })
 }
 
-function getRandomIndex(min, max) {
-    //return a random number between min (include) and max (exclude)
-    return Math.ceil(Math.random() * (max - min) + min);
-}
-
 //A function that return a random quote with a given array of quotes
 function getRandomQuote(quotes) {
     //Return a random quote in our fetched data
@@ -36,6 +53,7 @@ function getRandomQuote(quotes) {
 
 //Function to display a random quote in the #text element and the author in #author
 function setQuote(quote) {
+    changeColor();
     text.innerHTML = quote.text;
     if (quote.author === null) quote.author = "Unknown";
     author.innerHTML = `- ${quote.author}`;
