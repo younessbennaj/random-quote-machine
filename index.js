@@ -36,18 +36,22 @@ function getRandomIndex(min, max) {
     return Math.ceil(Math.random() * (max - min) + min);
 }
 
+//A function that return a random quote with a given array of quotes
 function getRandomQuote(quotes) {
     //Return a random quote in our fetched data
-    console.log(quotes[getRandomIndex(0, quotes.length + 1)]);
+    return quotes[getRandomIndex(0, quotes.length + 1)];
+}
+
+//Function to display a random quote in the #text element and the author in #author
+function setQuote(quote) {
+    text.innerHTML = quote.text;
+    author.innerHTML = quote.author;
 }
 
 let init = () => {
-    text.innerHTML = "Il y a des silences qui en disent longs, comme des paroles qui ne signifient rien..";
-    author.innerHTML = "Edith Piaff";
-
     getQuotes().then(
         quotes => {
-            getRandomQuote(quotes);
+            setQuote(getRandomQuote(quotes));
         },
         error => {
 
